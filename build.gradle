@@ -11,6 +11,7 @@ repositories {
 
 dependencies {
     compile "org.codehaus.groovy:groovy-all:2.5.8"
+    compile "cglib:cglib:2.2"
     testCompile(
             'org.codehaus.groovy:groovy-all:3.0.5',
             'org.spockframework:spock-core:2.0-M3-groovy-3.0',
