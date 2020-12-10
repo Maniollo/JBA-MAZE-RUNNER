@@ -19,10 +19,32 @@ class Maze {
         createMaze(prepareGrid(newHeight / 2, newWidth / 2));
     }
 
+    public Maze(List<String> asText) {
+        fromText(asText);
+    }
+
     //    Only for testing
     public Maze(int height, int width, Graph graph) {
         initMazeMatrix(height, width);
         createMaze(graph);
+    }
+    private void fromText(List<String> asText) {
+        int height = asText.size();
+        int width = asText.get(0).length() / 2;
+        arr = new int[height][width];
+        for (int i = 0; i < height; i++) {
+            String line = asText.get(i);
+            for (int j = 0; j < line.length() / 2; j++) {
+                char aChar = line.charAt(2 * j);
+                if (aChar == '\u2588' || aChar == '?') {
+                    arr[i][j] = 1;
+                } else if (aChar == ' ') {
+                    arr[i][j] = 0;
+                } else {
+                    throw new IllegalArgumentException("Cannot load the maze. It has an invalid format");
+                }
+            }
+        }
     }
 
     private void initMazeMatrix(int height, int width) {
@@ -135,5 +157,9 @@ class Maze {
             }
         }
         return asText.toString();
+    }
+
+    public byte[] asByteArray() {
+        return this.printAsText().getBytes();
     }
 }
